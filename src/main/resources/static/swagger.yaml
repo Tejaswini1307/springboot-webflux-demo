@@ -1,0 +1,76 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: "User API"
+host: "localhost:8080"
+basePath: "/api"
+schemes:
+  - "http"
+paths:
+  /user:
+    post:
+      summary: "Create a new user"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "User object that needs to be added"
+          required: true
+          schema:
+            $ref: "#/definitions/UserRequest"
+      responses:
+        "201":
+          description: "User created successfully"
+          schema:
+            $ref: "#/definitions/UserResponse"
+        "400":
+          description: "Invalid input"
+definitions:
+  UserRequest:
+    type: "object"
+    properties:
+      username:
+        type: "string"
+        example: "john_doe"
+      firstName:
+        type: "string"
+        example: "John"
+      lastName:
+        type: "string"
+        example: "Doe"
+      email:
+        type: "string"
+        format: "email"
+        example: "john.doe@example.com"
+      password:
+        type: "string"
+        format: "password"
+        example: "securePassword123"
+    required:
+      - "username"
+      - "firstName"
+      - "lastName"
+      - "email"
+      - "password"
+  UserResponse:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "c123e456-e89b-12d3-a456-426614174000"
+      username:
+        type: "string"
+        example: "john_doe"
+      firstName:
+        type: "string"
+        example: "John"
+      lastName:
+        type: "string"
+        example: "Doe"
+      email:
+        type: "string"
+        format: "email"
+        example: "john.doe@example.com"
